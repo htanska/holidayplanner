@@ -43,7 +43,7 @@ mvn test
 ```
 
 ## Challenges and improvement ( ToDo )
-There were not much challenges. It took around 0.5h for planning and around 3h for coding and testing.
+It took around 0.5h for planning and around 3h for coding and testing.
 Checking days that do not consume holiday days is quite slow for now (iterating every single day) and performance should be better at least on that part.
 Iterating each day is compromise not to use too much time on this task.
 There is also lack of validation, so the form of the dates is very strict and considered to be done mostly in front end.
