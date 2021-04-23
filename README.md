@@ -11,8 +11,8 @@
 First I thought the problem through, what things should be consider in planner. 
 Period must be iterated through day by day and count all days that consume holiday days.
 I chose Calendar class with GregorianCalendar extension so it would be easier to take into consideration length of the months, leap years and sundays.
-For checking valid holiday period I decided to do custom simple method which is not limited for using any year constant.
-For national holidays I decided to build a simple resources reader, so it can be easily extended for other countries as well.
+For checking valid holiday period we first compare years and if equal then check if start is before april then end cannot be april or after.
+For national holidays there is a setter method. Comparing national holiday days is done simply by checking if day is in list (String)
 
 ### Requirements
 - The maximum length of the time span is 50 days.
@@ -28,23 +28,29 @@ For example:
 Preliminaries: Java8 and Maven.
 
 Cd to project root folder
+Use 
+```
+mvn package
+```
+to build project with tests.
 Use
 ```
 mvn package -DskipTests=true 
 ```
-to build project. Run with arguments (period start date, period end date, locale), for example
+to build project without tests. 
+Run main method with arguments (period start date, period end date), for example
 ```
-java -jar target/holiday-planner-1.jar 1.5.2020 30.5.2020 fi
+java -jar target/holiday-planner-1.jar 1.5.2020 30.5.2020
 ```
 
-Write test cases in src/test/java/TestHolidayPlanner.java. Run tests typing
+Write test cases in src/test/java/TestHolidayPlanner.java. 
+Run tests by typing
 ```
 mvn test
 ```
 
 ## Challenges and improvement ( ToDo )
 It took around 0.5h for planning and around 3h for coding and testing.
-Checking days that do not consume holiday days is quite slow for now (iterating every single day) and performance should be better at least on that part.
-Iterating each day is compromise not to use too much time on this task.
+Checking days that do not consume holiday days could be more accurate, since now it is just comaring string values and also maybe performance should be better at least on that part.
 There is also lack of validation, so the form of the dates is very strict and considered to be done mostly in front end.
-Class setters are also missing from this version (since not needed here actually) and should be added.
+
