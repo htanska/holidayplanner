@@ -61,7 +61,7 @@ public class HolidayPlanner {
             }
             cal.add(Calendar.DAY_OF_YEAR, 1);
             maxDays++; // for not to loop forever which should not ever happen because dates have been checked
-        } while ((cal.get(CAL.YEAR) != endDate.get(CAL.YEAR) || cal.get(CAL.MONTH) != endDate.get(CAL.MONTH) || cal.get(CAL.DATE) != endDate.get(CAL.DATE)) && maxDays < MAX_TIME_SPAN);
+        } while ((cal.get(CAL.YEAR) != endDate.get(CAL.YEAR) || cal.get(CAL.MONTH) != endDate.get(CAL.MONTH) || cal.get(CAL.DATE) != endDate.get(CAL.DATE)) && maxDays <= MAX_TIME_SPAN);
         // last day is missing, so check and add last one if is consumable day
         if (endDate.get(CAL.DAY_OF_WEEK) != CAL.SUNDAY && !this.NATIONAL_HOLIDAYS.contains(SDF.format(cal.getTime()))) {
             holidayCount++;
