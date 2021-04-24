@@ -8,6 +8,12 @@ import java.util.Arrays;
 
 public class TestHolidayPlanner {
 
+    final String TOO_LONG_PERIOD = "Too long holiday period";
+    final String INVALID_PERIOD = "Invalid holiday period";
+    final String NOT_CHRONOLOGICAL = "Holiday period not in chronological order";
+    final String INVALID_DATE_FORMAT = "Invalid date format";
+    final List<String> nationalHolidaysRus = Arrays.asList(new String[]{"1.1.2021", "2.1.2021", "3.1.2021", "4.1.2021", "5.1.2021", "6.1.2021", "7.1.2021", "8.1.2021", "9.1.2021", "10.1.2021", "21.2.2021", "22.2.2021", "23.2.2021", "6.3.2021", "7.3.2021", "8.3.2021", "1.5.2021", "2.5.2021", "3.5.2021", "8.5.2021", "9.5.2021", "10.5.2021", "12.6.2021", "13.6.2021", "14.6.2021", "4.11.2021", "5.11.2021", "6.11.2021", "7.11.2021", "31.12.2021"});
+
     @Test
     public void testChristmasHoliday() throws Exception {
         HolidayPlanner hp = new HolidayPlanner("1.12.2020", "3.1.2021");
@@ -33,7 +39,7 @@ public class TestHolidayPlanner {
     @Test
     public void testTooLongHolidayPeriod() throws Exception {
         tooLongThrown.expect(Exception.class);
-        tooLongThrown.expectMessage("Too long holiday period");
+        tooLongThrown.expectMessage(TOO_LONG_PERIOD);
         HolidayPlanner hp = new HolidayPlanner("4.1.2021", "23.2.2021");
     }
 
@@ -42,7 +48,7 @@ public class TestHolidayPlanner {
     @Test
     public void testInvalidHolidayPeriod() throws Exception {
         invalidPeriodThrown.expect(Exception.class);
-        invalidPeriodThrown.expectMessage("Invalid holiday period");
+        invalidPeriodThrown.expectMessage(INVALID_PERIOD);
         HolidayPlanner hp = new HolidayPlanner("15.3.2020", "1.5.2020");
     }
 
@@ -51,7 +57,7 @@ public class TestHolidayPlanner {
     @Test
     public void testNotChronologicalHolidayPeriod() throws Exception {
         notChronologicalThrown.expect(Exception.class);
-        notChronologicalThrown.expectMessage("Holiday period not in chronological order");
+        notChronologicalThrown.expectMessage(NOT_CHRONOLOGICAL);
         HolidayPlanner hp = new HolidayPlanner("15.6.2020", "1.6.2020");
     }
 
@@ -60,14 +66,14 @@ public class TestHolidayPlanner {
     @Test
     public void testInvalidDateFormat() throws Exception {
         invalidDateThrown.expect(Exception.class);
-        invalidDateThrown.expectMessage("Invalid date format");
+        invalidDateThrown.expectMessage(INVALID_DATE_FORMAT);
         HolidayPlanner hp = new HolidayPlanner("15.6.2020", "1/6/2020");
     }
 
     // test for some other country national holidays
     @Test
     public void testHolidayPeriodWithRussiaNationalHolidays() throws Exception {
-        List<String> nationalHolidaysRus = Arrays.asList(new String[]{"1.1.2021", "2.1.2021", "3.1.2021", "4.1.2021", "5.1.2021", "6.1.2021", "7.1.2021", "8.1.2021", "9.1.2021", "10.1.2021", "21.2.2021", "22.2.2021", "23.2.2021", "6.3.2021", "7.3.2021", "8.3.2021", "1.5.2021", "2.5.2021", "3.5.2021", "8.5.2021", "9.5.2021", "10.5.2021", "12.6.2021", "13.6.2021", "14.6.2021", "4.11.2021", "5.11.2021", "6.11.2021", "7.11.2021", "31.12.2021"});
+
         HolidayPlanner hp = new HolidayPlanner("1.1.2021", "31.1.2021");
         hp.setNationalHolidays(nationalHolidaysRus);
         assertEquals(18, hp.getHolidayPeriodConsumableDays());
